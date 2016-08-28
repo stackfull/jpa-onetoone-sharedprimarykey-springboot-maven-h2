@@ -26,16 +26,13 @@ public class HelloJpaApplication implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        // save a couple of books
-        List<Book> books = new ArrayList<>();
-        books.add(new Book("Book A", new BookDetail(49)));
-        books.add(new Book("Book B", new BookDetail(59)));
-        books.add(new Book("Book C", new BookDetail(69)));
-        bookRepository.save(books);
 
-        // fetch all books
-        for (Book book : bookRepository.findAll()) {
-            logger.info(book.toString());
-        }
+        Book original = bookRepository.save(new Book("My Book", null));
+
+        original.setBookDetail(new BookDetail(1001));
+
+        Book updated = bookRepository.save(original);
+
+        logger.info(updated.toString());
     }
 }

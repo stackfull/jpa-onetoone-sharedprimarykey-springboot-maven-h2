@@ -19,8 +19,7 @@ public class Book implements Serializable{
 
     public Book(String name, BookDetail bookDetail){
         this.name = name;
-        this.bookDetail = bookDetail;
-        this.bookDetail.setBook(this);
+        setBookDetail(bookDetail);
     }
 
 
@@ -49,12 +48,15 @@ public class Book implements Serializable{
 
     public void setBookDetail(BookDetail bookDetail) {
         this.bookDetail = bookDetail;
+        if (bookDetail != null) {
+            this.bookDetail.setBook(this);
+        }
     }
 
     @Override
     public String toString() {
         return String.format(
                 "Book[id=%d, name='%s', number of pages='%d']",
-                id, name, bookDetail.getNumberOfPages());
+                id, name, bookDetail == null ? -1 : bookDetail.getNumberOfPages());
     }
 }
