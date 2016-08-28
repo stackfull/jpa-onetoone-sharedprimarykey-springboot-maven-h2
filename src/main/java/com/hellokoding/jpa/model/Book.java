@@ -5,9 +5,16 @@ import java.io.Serializable;
 
 @Entity
 public class Book implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private String name;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "book")
     private BookDetail bookDetail;
+
 
     public Book(){
 
@@ -23,8 +30,6 @@ public class Book implements Serializable{
     }
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -41,7 +46,6 @@ public class Book implements Serializable{
         this.name = name;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "book")
     public BookDetail getBookDetail() {
         return bookDetail;
     }

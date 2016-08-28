@@ -6,8 +6,15 @@ import java.io.Serializable;
 @Entity
 @Table(name = "book_detail")
 public class BookDetail implements Serializable{
+
+    @Column(name = "number_of_pages")
     private Integer numberOfPages;
+
+    @Id
+    @OneToOne
+    @JoinColumn(name = "book_id")
     private Book book;
+
 
     public BookDetail(){
 
@@ -17,7 +24,6 @@ public class BookDetail implements Serializable{
         this.numberOfPages = numberOfPages;
     }
 
-    @Column(name = "number_of_pages")
     public Integer getNumberOfPages() {
         return numberOfPages;
     }
@@ -26,9 +32,6 @@ public class BookDetail implements Serializable{
         this.numberOfPages = numberOfPages;
     }
 
-    @Id
-    @OneToOne
-    @JoinColumn(name = "book_id")
     public Book getBook() {
         return book;
     }
